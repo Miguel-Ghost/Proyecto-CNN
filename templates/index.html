@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente de Cultivos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark-theme">
+    <div class="chatbot-container">
+        <!-- Encabezado -->
+        <div class="chatbot-header">
+            <h1>Asistente de Cultivos</h1>
+            <p>Diagnóstico Inteligente para tus Plantas</p>
+        </div>
+
+        <div class="sidebar">
+    <div class="sidebar-header">
+        <h2>Asistente de Cultivos</h2>
+    </div>
+    <div class="sidebar-chats">
+        <!-- Aquí se muestran los chats previos -->
+        <div class="chat-item">Chat 1</div>
+        <div class="chat-item">Chat 2</div>
+        <div class="chat-item">Chat 3</div>
+    </div>
+    <button class="new-chat-button">+ Nuevo Chat</button>
+</div>
+
+        <!-- Caja de Chat -->
+        <div class="chatbox">
+            <div class="chatbox-messages">
+                {% for mensaje in mensajes %}
+                    {% if mensaje.imagen %}
+                        <img src="{{ mensaje.imagen }}" alt="Imagen cargada" class="chatbox-image">
+                    {% endif %}
+                    {% if mensaje.texto %}
+                         <div class="message {{ mensaje.tipo }}">
+                            {{ mensaje.texto }}
+                         </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div id="image-preview-container"></div>
+                <form id="chat-form" enctype="multipart/form-data">
+    <div class="input-container">
+        <input type="text" id="user_message" class="chat-input" placeholder="Escribe un mensaje..." />
+        <label for="file-upload" class="file-upload-label">
+            <i class="fa fa-paperclip"></i>
+            <input type="file" id="file-upload" class="file-upload" />
+        </label>
+        <button type="button" id="send-button" class="send-button">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </div>
+</form>
+            </div>
+        </div>
+    <script>
+        // Asegurar que el scroll se mantenga en el último mensaje
+        const chatboxMessages = document.querySelector('.chatbox-messages');
+        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+    </script>
+</body>
+<script src="/static/script.js"></script>
+</html>
